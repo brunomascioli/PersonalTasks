@@ -1,4 +1,4 @@
-package com.example.personaltasks
+package com.example.personaltasks.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

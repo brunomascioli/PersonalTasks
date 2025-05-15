@@ -1,10 +1,13 @@
-package com.example.personaltasks
+package com.example.personaltasks.ui
 
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.personaltasks.R
+import com.example.personaltasks.adapter.TaskRvAdapter
 import com.example.personaltasks.databinding.ActivityMainBinding
+import com.example.personaltasks.model.Task
 import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {

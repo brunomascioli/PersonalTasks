@@ -1,9 +1,10 @@
-package com.example.personaltasks
+package com.example.personaltasks.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personaltasks.databinding.TaskItemBinding
+import com.example.personaltasks.model.Task
 import java.time.format.DateTimeFormatter
 
 class TaskRvAdapter (
