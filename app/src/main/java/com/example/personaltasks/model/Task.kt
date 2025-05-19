@@ -1,13 +1,21 @@
 package com.example.personaltasks.model
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import java.time.LocalDateTime
 
+@Entity(tableName = "task_table")
 @Parcelize
 data class Task(
-    val title: String,
-    var isDone: Boolean = false,
-    val description: String,
-    val limitDate: LocalDateTime
-) : Parcelable
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @ColumnInfo(name = "title") var title: String,
+    @ColumnInfo(name = "isDone") var isDone: Boolean = false,
+    @ColumnInfo(name = "description") var description: String,
+    @ColumnInfo(name = "limitDate") var limitDate: String
+) : Parcelable {
+    init {
+        require(title.isNotBlank()) { "Title can't be blank" }
+    }
+}
