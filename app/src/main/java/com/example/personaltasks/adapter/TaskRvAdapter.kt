@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personaltasks.databinding.TaskItemBinding
 import com.example.personaltasks.model.Task
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class TaskRvAdapter (
@@ -26,11 +29,20 @@ class TaskRvAdapter (
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = tasks[position]
-        val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm")
+
+        val millis = task.limitDate.toLong()
+        val instant = Instant.ofEpochMilli(millis)
+        val parsedDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+        val outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy | HH:mm")
+        val formattedDate = parsedDate.format(outputFormatter)
+
         holder.tib.apply {
             titleTask.text = task.title
-            descriptionTask.text = if (task.description.length > 50) "${task.description.subSequence(0, 50)} ..." else task.description
-            dueDateTask.text = "Data limite: ${task.limitDate.format(dateFormatter)}"
+            descriptionTask.text = if (task.description.length > 50)
+                "${task.description.substring(0, 50)} ..."
+            else
+                task.description
+            dueDateTask.text = "Data limite: $formattedDate"
         }
     }
 }
