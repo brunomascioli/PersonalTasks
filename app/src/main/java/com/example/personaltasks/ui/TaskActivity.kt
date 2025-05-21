@@ -37,8 +37,22 @@ class TaskActivity : AppCompatActivity() {
                 descEt.isEnabled = false
                 datepicker.isEnabled = false
                 saveBtn.visibility = View.GONE
+                cancelBtn.text = "Voltar"
             } else {
                 supportActionBar?.subtitle = "Edit task"
+            }
+
+            receivedTask?.let { task ->
+                titleEt.setText(task.title)
+                descEt.setText(task.description)
+                val calendar = Calendar.getInstance().apply {
+                    timeInMillis = task.limitDate.toLong()
+                }
+                datepicker.updateDate(
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+                )
             }
         }
 

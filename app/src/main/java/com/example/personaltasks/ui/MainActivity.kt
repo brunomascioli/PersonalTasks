@@ -15,9 +15,10 @@ import com.example.personaltasks.adapter.TaskRvAdapter
 import com.example.personaltasks.controller.TaskController
 import com.example.personaltasks.databinding.ActivityMainBinding
 import com.example.personaltasks.model.Constant.EXTRA_TASK
+import com.example.personaltasks.model.Constant.EXTRA_VIEW_TASK
 import com.example.personaltasks.model.Task
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnTaskClickListener {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val taskRvAdapter: TaskRvAdapter by lazy {
-        TaskRvAdapter(tasks)
+        TaskRvAdapter(this, tasks)
     }
 
     private lateinit var taskActivityResultLauncher: ActivityResultLauncher<Intent>
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         observeTasks()
 
         setupActivityResultLauncher()
+
     }
 
     private fun setupActivityResultLauncher() {
@@ -108,6 +110,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.option_menu, menu)
         return true
+    }
+
+    override fun onRemoveTaskMenuItemClick(position: Int) {
+       val task = tasks[position]
+        tasks.removeAt(position)
+        taskController.deleteTask(task)
+        taskRvAdapter.notifyItemRemoved(position)
+        Toast.makeText(this, "Tarefa removida!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDetailTaskItemClick(position: Int) {
+        Intent(this, TaskActivity::class.java).apply {
+            putExtra(EXTRA_TASK, tasks[position])
+            putExtra(EXTRA_VIEW_TASK, true)
+            startActivity(this)
+        }
+    }
+
+    override fun onEditTaskMenuItemClick(position: Int) {
+        taskActivityResultLauncher.launch(Intent(this, TaskActivity::class.java).apply {
+            putExtra(EXTRA_TASK, tasks[position])
+        })
+    }
+
+    override fun onTaskClick(position: Int) {
+        Intent(this, TaskActivity::class.java).apply {
+            putExtra(EXTRA_TASK, tasks[position])
+            putExtra(EXTRA_VIEW_TASK, true)
+            startActivity(this)
+        }
     }
 
 }

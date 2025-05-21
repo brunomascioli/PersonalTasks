@@ -4,4 +4,7 @@
     <string name="save">Save</string>
     <string name="description">Descrição</string>
     <string name="task_title">Título da Tarefa</string>
+    <string name="delete_task">Deletar tarefa</string>
+    <string name="show_task">Mostrar detalhes</string>
+    <string name="edit_task">Editar tarefa</string>
 </resources>
