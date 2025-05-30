@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -112,6 +113,13 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
         taskController.deleteTask(task)
         taskRvAdapter.notifyItemRemoved(position)
         Toast.makeText(this, "Tarefa removida!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onTaskChecked(position: Int) {
+        val task = tasks[position]
+        task.isDone = !task.isDone
+        taskController.updateTask(task)
+        taskRvAdapter.notifyItemChanged(position)
     }
 
     override fun onDetailTaskItemClick(position: Int) {

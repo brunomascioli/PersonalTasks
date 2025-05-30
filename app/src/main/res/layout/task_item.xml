@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/task_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -53,6 +54,15 @@
             app:layout_constraintStart_toStartOf="@id/description_task"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/description_task"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/task_is_done"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

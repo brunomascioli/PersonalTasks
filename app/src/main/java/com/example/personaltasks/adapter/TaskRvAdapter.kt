@@ -1,5 +1,6 @@
 package com.example.personaltasks.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.logging.Logger
 
 class TaskRvAdapter (
     private val onTaskClickListener: OnTaskClickListener,
@@ -41,6 +43,10 @@ class TaskRvAdapter (
             tib.root.setOnClickListener {
                 onTaskClickListener.onTaskClick(adapterPosition)
             }
+
+            tib.taskIsDone.setOnClickListener {
+                onTaskClickListener.onTaskChecked(adapterPosition)
+            }
         }
     }
 
@@ -64,6 +70,7 @@ class TaskRvAdapter (
         val outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         val formattedDate = parsedDate.format(outputFormatter)
 
+
         holder.tib.apply {
             titleTask.text = task.title
             descriptionTask.text = if (task.description.length > 50)
@@ -71,6 +78,7 @@ class TaskRvAdapter (
             else
                 task.description
             dueDateTask.text = "Data limite: $formattedDate"
+            taskIsDone.isChecked = task.isDone
         }
     }
 }

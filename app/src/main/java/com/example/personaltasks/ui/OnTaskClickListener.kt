@@ -5,4 +5,5 @@ interface OnTaskClickListener {
     fun onDetailTaskItemClick(position: Int)
     fun onEditTaskMenuItemClick(position: Int)
     fun onTaskClick(position: Int)
+    fun onTaskChecked(position: Int)
 }
