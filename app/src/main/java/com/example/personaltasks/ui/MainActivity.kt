@@ -66,19 +66,13 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
                     tasks.add(receivedTask)
                     taskRvAdapter.notifyItemInserted(tasks.lastIndex)
                     taskController.insertTask(receivedTask)
-                    Toast(this).apply {
-                        setText("Tarefa Inserida!")
-                        show()
-                    }
+                    Toast.makeText(this, "Tarefa Inserida!", Toast.LENGTH_SHORT).show()
                 }
                 else {
                     tasks[position] = receivedTask
                     taskRvAdapter.notifyItemChanged(position)
                     taskController.updateTask(receivedTask)
-                    Toast(this).apply {
-                        setText("Tarefa Atualizada!")
-                        show()
-                    }
+                    Toast.makeText(this, "Tarefa Atualizada!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
