@@ -10,12 +10,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Task(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "title") var title: String,
+    @ColumnInfo(name = "title") var title: String = "",
     @ColumnInfo(name = "isDone") var isDone: Boolean = false,
-    @ColumnInfo(name = "description") var description: String,
-    @ColumnInfo(name = "limitDate") var limitDate: String
-) : Parcelable {
-    init {
-        require(title.isNotBlank()) { "Title can't be blank" }
-    }
-}
+    @ColumnInfo(name = "description") var description: String = "",
+    @ColumnInfo(name = "limitDate") var limitDate: String = ""
+) : Parcelable

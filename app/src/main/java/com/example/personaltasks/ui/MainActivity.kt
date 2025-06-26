@@ -64,14 +64,10 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
             task?.let{ receivedTask ->
                 val position = tasks.indexOfFirst { it.id == receivedTask.id }
                 if (position == -1) {
-                    tasks.add(receivedTask)
-                    taskRvAdapter.notifyItemInserted(tasks.lastIndex)
                     taskController.insertTask(receivedTask)
                     Toast.makeText(this, "Tarefa Inserida!", Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    tasks[position] = receivedTask
-                    taskRvAdapter.notifyItemChanged(position)
                     taskController.updateTask(receivedTask)
                     Toast.makeText(this, "Tarefa Atualizada!", Toast.LENGTH_SHORT).show()
                 }
@@ -109,9 +105,7 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
 
     override fun onRemoveTaskMenuItemClick(position: Int) {
        val task = tasks[position]
-        tasks.removeAt(position)
         taskController.deleteTask(task)
-        taskRvAdapter.notifyItemRemoved(position)
         Toast.makeText(this, "Tarefa removida!", Toast.LENGTH_SHORT).show()
     }
 
@@ -119,7 +113,6 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
         val task = tasks[position]
         task.isDone = !task.isDone
         taskController.updateTask(task)
-        taskRvAdapter.notifyItemChanged(position)
     }
 
     override fun onDetailTaskItemClick(position: Int) {

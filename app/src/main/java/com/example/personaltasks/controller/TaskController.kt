@@ -2,13 +2,14 @@ package com.example.personaltasks.controller
 
 import android.content.Context
 import com.example.personaltasks.model.Task
-import com.example.personaltasks.model.TaskDatabase
+import com.example.personaltasks.model.TaskDao
+import com.example.personaltasks.model.TaskFirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TaskController(context: Context) {
-    private val taskDao = TaskDatabase.getDatabase(context).taskDao()
+    private val taskDao: TaskDao = TaskFirebaseDatabase()
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
