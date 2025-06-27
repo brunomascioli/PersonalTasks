@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
             }
             R.id.sign_out_mi -> {
                 Firebase.auth.signOut()
-                finish()
+                startActivity(Intent(this, LoginActivity::class.java))
                 true
             }
             R.id.history_mi -> {

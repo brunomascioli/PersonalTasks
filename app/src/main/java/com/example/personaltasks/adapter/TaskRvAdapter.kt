@@ -1,6 +1,5 @@
 package com.example.personaltasks.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -8,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.personaltasks.R
 import com.example.personaltasks.databinding.TaskItemBinding
 import com.example.personaltasks.model.Task
+import com.example.personaltasks.model.TaskPriority
 import com.example.personaltasks.ui.OnTaskClickListener
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.logging.Logger
 
 class TaskRvAdapter (
     private val onTaskClickListener: OnTaskClickListener,
@@ -78,6 +77,12 @@ class TaskRvAdapter (
                 task.description
             dueDateTask.text = "Data limite: $formattedDate"
             taskIsDone.isChecked = task.isDone
+
+            when (task.priority) {
+                TaskPriority.ALTA ->  holder.tib.taskCard.setBackgroundResource(R.drawable.bg_priority_high)
+                TaskPriority.MEDIA -> holder.tib.taskCard.setBackgroundResource(R.drawable.bg_priority_medium)
+                TaskPriority.BAIXA -> holder.tib.taskCard.setBackgroundResource(R.drawable.bg_priority_low)
+            }
         }
     }
 }

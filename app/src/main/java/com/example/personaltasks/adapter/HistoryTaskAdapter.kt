@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.personaltasks.R
 import com.example.personaltasks.databinding.TaskItemBinding
 import com.example.personaltasks.model.Task
+import com.example.personaltasks.model.TaskPriority
 import com.example.personaltasks.ui.OnHistoryTaskClickListener
 import java.time.Instant
 import java.time.LocalDateTime
@@ -71,9 +72,14 @@ class HistoryTaskAdapter(
                     task.description
 
             dueDateTask.text = "Data limite: $formattedDate"
-
             taskIsDone.isChecked = task.isDone
             taskIsDone.isEnabled = false
+
+            when (task.priority) {
+                TaskPriority.ALTA ->  holder.binding.taskCard.setBackgroundResource(R.drawable.bg_priority_high)
+                TaskPriority.MEDIA -> holder.binding.taskCard.setBackgroundResource(R.drawable.bg_priority_medium)
+                TaskPriority.BAIXA -> holder.binding.taskCard.setBackgroundResource(R.drawable.bg_priority_low)
+            }
         }
     }
 }

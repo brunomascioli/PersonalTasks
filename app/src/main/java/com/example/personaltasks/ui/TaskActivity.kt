@@ -4,11 +4,15 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import com.example.personaltasks.R
 import com.example.personaltasks.databinding.ActivityTaskBinding
 import com.example.personaltasks.model.Constant.EXTRA_TASK
 import com.example.personaltasks.model.Constant.EXTRA_VIEW_TASK
 import com.example.personaltasks.model.Task
+import com.example.personaltasks.model.TaskPriority
 import java.util.Calendar
 
 class TaskActivity : AppCompatActivity() {
@@ -17,6 +21,8 @@ class TaskActivity : AppCompatActivity() {
     }
 
     private var receivedTask: Task? = null
+
+    private lateinit var spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,8 @@ class TaskActivity : AppCompatActivity() {
 
         val viewTask = intent.getBooleanExtra(EXTRA_VIEW_TASK, false)
 
+        setUpTaskPrioritySpinner()
+
         with(binding) {
             if (receivedTask == null) {
                 supportActionBar?.subtitle = "New task"
@@ -36,6 +44,7 @@ class TaskActivity : AppCompatActivity() {
                 titleEt.isEnabled = false
                 descEt.isEnabled = false
                 datepicker.isEnabled = false
+                spinner.isEnabled = false
                 saveBtn.visibility = View.GONE
                 cancelBtn.text = "Voltar"
             } else {
@@ -45,6 +54,7 @@ class TaskActivity : AppCompatActivity() {
             receivedTask?.let { task ->
                 titleEt.setText(task.title)
                 descEt.setText(task.description)
+                prioritySpinner.setSelection(task.priority.ordinal)
                 val calendar = Calendar.getInstance().apply {
                     timeInMillis = task.limitDate.toLong()
                 }
@@ -57,6 +67,20 @@ class TaskActivity : AppCompatActivity() {
         }
 
         setupListeners()
+    }
+
+    private fun setUpTaskPrioritySpinner() {
+        spinner = binding.prioritySpinner
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.task_priority_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+
+        receivedTask?.let { spinner.setSelection(it.priority.ordinal) }
     }
 
     private fun loadTaskIfExists(): Task? {
@@ -77,15 +101,11 @@ class TaskActivity : AppCompatActivity() {
                 val task = Task(
                     receivedTask?.id ?: hashCode(),
                     title = if (titleEt.text.toString().isBlank()) "Sem Título" else titleEt.text.toString(),
-                    description = descEt.text.toString(),
-                    limitDate = timestamp.toString()
+                    description = if (descEt.text.toString().isBlank()) "Sem Descrição" else descEt.text.toString(),
+                    limitDate = timestamp.toString(),
+                    priority = TaskPriority.entries[spinner.selectedItemPosition]
                 )
-
-                val resultIntent = Intent().apply {
-                    putExtra(EXTRA_TASK, task)
-                }
-
-                setResult(RESULT_OK, resultIntent)
+                setResult(RESULT_OK, Intent().putExtra(EXTRA_TASK, task))
                 finish()
             }
 
