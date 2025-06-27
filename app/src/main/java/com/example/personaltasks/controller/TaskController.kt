@@ -1,6 +1,8 @@
 package com.example.personaltasks.controller
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.example.personaltasks.model.Task
 import com.example.personaltasks.model.TaskDao
 import com.example.personaltasks.model.TaskFirebaseDatabase
@@ -19,17 +21,39 @@ class TaskController(context: Context) {
         }
     }
 
+    fun getRemovedTasks(): LiveData<List<Task>> {
+        val result = MediatorLiveData<List<Task>>()
+        val source = taskDao.getAll()
+
+        result.addSource(source) { allTasks ->
+            result.value = allTasks.filter { it.deleted }
+        }
+
+        return result
+    }
+
+
     fun deleteAllTasks() {
         scope.launch {
             taskDao.deleteAll()
         }
     }
 
-    fun getAllTasks() = taskDao.getAll()
+    fun getAllTasks(): LiveData<List<Task>> {
+        val result = MediatorLiveData<List<Task>>()
+        val source = taskDao.getAll()
+
+        result.addSource(source) { allTasks ->
+            result.value = allTasks.filter { !it.deleted }
+        }
+
+        return result
+    }
 
     fun deleteTask(task: Task) {
         scope.launch {
-            taskDao.delete(task)
+            task.deleted = true
+            taskDao.update(task)
         }
     }
 

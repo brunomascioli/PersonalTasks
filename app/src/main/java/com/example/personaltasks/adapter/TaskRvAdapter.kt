@@ -70,7 +70,6 @@ class TaskRvAdapter (
         val outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         val formattedDate = parsedDate.format(outputFormatter)
 
-
         holder.tib.apply {
             titleTask.text = task.title
             descriptionTask.text = if (task.description.length > 50)

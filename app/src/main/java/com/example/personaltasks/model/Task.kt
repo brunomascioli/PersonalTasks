@@ -13,5 +13,6 @@ data class Task(
     @ColumnInfo(name = "title") var title: String = "",
     @ColumnInfo(name = "isDone") var isDone: Boolean = false,
     @ColumnInfo(name = "description") var description: String = "",
-    @ColumnInfo(name = "limitDate") var limitDate: String = ""
+    @ColumnInfo(name = "limitDate") var limitDate: String = "",
+    @ColumnInfo(name = "deleted") var deleted: Boolean = false
 ) : Parcelable

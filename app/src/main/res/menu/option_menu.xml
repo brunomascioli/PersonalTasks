@@ -7,6 +7,10 @@
         android:title="Adicionar Tarefa"
         app:showAsAction="never" />
     <item
+        android:id="@+id/history_mi"
+        android:title="Tarefas excluídas"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/sign_out_mi"
         android:title="@string/sign_out"
         app:showAsAction="never" />
