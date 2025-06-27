@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
     private lateinit var taskActivityResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //testing
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
