@@ -18,6 +18,8 @@ import com.example.personaltasks.databinding.ActivityMainBinding
 import com.example.personaltasks.model.Constant.EXTRA_TASK
 import com.example.personaltasks.model.Constant.EXTRA_VIEW_TASK
 import com.example.personaltasks.model.Task
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity(), OnTaskClickListener {
     private val binding: ActivityMainBinding by lazy {
@@ -94,6 +96,11 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
                 taskActivityResultLauncher.launch(Intent(this, TaskActivity::class.java))
                 true
             }
+            R.id.sign_out_mi -> {
+                Firebase.auth.signOut()
+                finish()
+                true
+            }
             else -> false
         }
     }
@@ -137,4 +144,8 @@ class MainActivity : AppCompatActivity(), OnTaskClickListener {
         }
     }
 
+    override fun onStart(){
+        super.onStart()
+        if (Firebase.auth.currentUser == null) finish()
+    }
 }
