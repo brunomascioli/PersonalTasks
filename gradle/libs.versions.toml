@@ -13,6 +13,7 @@ parcelize = "2.1.20"
 googleServices = "4.4.2"
 firebaseVersion = "33.14.0"
 kspVersion = "2.1.20-2.0.1"
+firebaseUiAuthVersion = "9.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +27,9 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseVersion" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx" }
+firebase-ui-auth = { group = "com.firebaseui", name = "firebase-ui-auth", version.ref = "firebaseUiAuthVersion" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
