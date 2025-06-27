@@ -14,5 +14,6 @@ data class Task(
     @ColumnInfo(name = "isDone") var isDone: Boolean = false,
     @ColumnInfo(name = "description") var description: String = "",
     @ColumnInfo(name = "limitDate") var limitDate: String = "",
-    @ColumnInfo(name = "deleted") var deleted: Boolean = false
+    @ColumnInfo(name = "deleted") var deleted: Boolean = false,
+    @ColumnInfo(name = "priority") var priority: TaskPriority = TaskPriority.BAIXA
 ) : Parcelable
