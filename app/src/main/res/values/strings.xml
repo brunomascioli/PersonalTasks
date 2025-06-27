@@ -7,4 +7,9 @@
     <string name="delete_task">Deletar tarefa</string>
     <string name="show_task">Mostrar detalhes</string>
     <string name="edit_task">Editar tarefa</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="sign_out">Sign out</string>
+    <string name="forgot_password">Forgot my password</string>
 </resources>
