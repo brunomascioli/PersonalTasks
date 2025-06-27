@@ -14,4 +14,5 @@ Aplicativo desenvolvido em Kotlin que tem como objetivo adicionar, listar e remo
 
 ## Demonstração
 
-[![Demonstração do projeto PersonalTasks](https://img.youtube.com/vi/d0ipQEwZhp4/0.jpg)](https://www.youtube.com/watch?v=d0ipQEwZhp4)
+- Primeira Versão: https://www.youtube.com/watch?v=d0ipQEwZhp4
+- Segunda Versão: https://youtube.com/shorts/9ZSSWwKAnnE
